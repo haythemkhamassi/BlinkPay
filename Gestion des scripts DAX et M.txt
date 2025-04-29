@@ -1,0 +1,29 @@
+Total Sales Revenue = SUM('Sales'[Revenue])
+
+Revenue Growth Rate = DIVIDE(SUM('Sales'[Revenue]) - SUM('Sales (Previous)'[Revenue]), SUM('Sales (Previous)'[Revenue])) * 100
+
+Gross Profit Margin = DIVIDE(SUM('Sales'[Revenue]) - SUM('Sales'[COGS]), SUM('Sales'[Revenue])) * 100
+
+Customer Retention Rate = DIVIDE((Customers End of Period - New Customers), Customers Start of Period) * 100
+
+Customer Lifetime Value = [Average Purchase Value] * [Purchase Frequency] * [Customer Lifespan]
+
+Average Order Value = DIVIDE(SUM('Sales'[Revenue]), COUNT('Sales'[OrderID]))
+
+Supplier Cost Efficiency = DIVIDE((Previous Cost - Current Cost), Previous Cost) * 100
+
+COGS = SUM('Sales'[COGS])
+
+Cost per Unit = DIVIDE(SUM('Sales'[Production Costs]), SUM('Sales'[Units Produced]))
+
+Expense to Sales Ratio = DIVIDE(SUM('Expenses'[Amount]), SUM('Sales'[Revenue])) * 100
+
+DPO = DIVIDE(SUM('Accounts Payable'[Amount]), SUM('Sales'[COGS])) * 365
+
+DSO = DIVIDE(SUM('Accounts Receivable'[Amount]), SUM('Sales'[Total Credit Sales])) * 365
+
+Accounts Receivable Turnover = DIVIDE(SUM('Sales'[Total Credit Sales]), AVERAGE('Accounts Receivable'[Amount]))
+
+Dead Stock Percentage = DIVIDE(SUM('Inventory'[Dead Stock Value]), SUM('Inventory'[Total Inventory Value])) * 100
+
+Inventory Turnover Ratio = DIVIDE(SUM('Sales'[COGS]), AVERAGE('Inventory'[Inventory Value]))
