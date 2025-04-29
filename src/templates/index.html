@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Time Series Revenue Prediction</title>
+<style>
+  body {
+    background-color: #121212;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+  }
+  .container {
+    background-color: #1e1e1e;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(187, 134, 252, 0.6);
+    max-width: 480px;
+    width: 100%;
+  }
+  h1 {
+    color: #bb86fc;
+    margin-bottom: 25px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 2rem;
+  }
+  label {
+    display: block;
+    margin-top: 15px;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  input[type="number"], input[type="text"] {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 6px;
+    background-color: #2c2c2c;
+    border: 1px solid #444;
+    border-radius: 6px;
+    color: #e0e0e0;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  input[type="number"]:focus, input[type="text"]:focus {
+    border-color: #bb86fc;
+    outline: none;
+  }
+  button {
+    margin-top: 25px;
+    padding: 12px 20px;
+    background-color: #bb86fc;
+    border: none;
+    border-radius: 8px;
+    color: #121212;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background-color: #9a67ea;
+  }
+  #result {
+    margin-top: 25px;
+    font-size: 1.3rem;
+    color: #03dac6;
+    text-align: center;
+    min-height: 1.5em;
+  }
+  footer {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #666;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Time Series Revenue Prediction</h1>
+    <form id="predictForm" autocomplete="off">
+      <label for="Valeur_des_Actifs">Valeur_des_Actifs</label>
+      <input type="number" step="any" id="Valeur_des_Actifs" name="Valeur_des_Actifs" required />
+
+      <label for="Amortissement_Cumule">Amortissement_Cumule</label>
+      <input type="number" step="any" id="Amortissement_Cumule" name="Amortissement_Cumule" required />
+
+      <label for="Cout_de_Maintenance">Cout_de_Maintenance</label>
+      <input type="number" step="any" id="Cout_de_Maintenance" name="Cout_de_Maintenance" required />
+
+      <label for="Investissement_dans_les_Actifs">Investissement_dans_les_Actifs</label>
+      <input type="number" step="any" id="Investissement_dans_les_Actifs" name="Investissement_dans_les_Actifs" required />
+
+      <label for="Quantity">Quantity</label>
+      <input type="number" step="any" id="Quantity" name="Quantity" required />
+
+      <button type="submit">Predict</button>
+    </form>
+    <div id="result"></div>
+    <footer>© 2025 Time Series Prediction</footer>
+  </div>
+
+  <script>
+    const form = document.getElementById('predictForm');
+    const resultDiv = document.getElementById('result');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      resultDiv.textContent = 'Predicting...';
+
+      const formData = new FormData(form);
+      const data = {};
+      formData.forEach((value, key) => {
+        data[key] = parseFloat(value);
+      });
+
+      try {
+        const response = await fetch('/predict', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          resultDiv.textContent = 'Error: ' + (errorData.error || 'Unknown error');
+          return;
+        }
+
+        const result = await response.json();
+        resultDiv.textContent = 'Forecasted Revenue: ' + result.forecast.toFixed(2);
+      } catch (error) {
+        resultDiv.textContent = 'Error: ' + error.message;
+      }
+    });
+  </script>
+</body>
+</html>

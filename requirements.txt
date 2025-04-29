@@ -1,0 +1,8 @@
+# List your project dependencies here
+flask
+pandas
+numpy
+statsmodels
+scikit-learn
+matplotlib
+pyodbc
