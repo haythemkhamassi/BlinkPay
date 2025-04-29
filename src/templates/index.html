@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Product Category Prediction</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #1e1e1e;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ffb6c1, #add8e6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px 0;
+            text-align: left;
+            font-weight: 600;
+            background: linear-gradient(45deg, #ffb6c1, #add8e6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: #e0e0e0;
+            font-size: 14px;
+        }
+        input[type="text"]::placeholder {
+            color: #888;
+        }
+        button {
+            margin-top: 25px;
+            padding: 10px 20px;
+            background-color: #6200ee;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #3700b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: 600;
+            background: linear-gradient(45deg, #ffb6c1, #add8e6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .error {
+            color: #ff5252;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Product Category Prediction</h1>
+        {% if prediction %}
+            <div class="result">Predicted Category: {{ prediction }}</div>
+        {% elif error %}
+            <div class="result error">Error: {{ error }}</div>
+        {% endif %}
+        <form method="post" action="/predict">
+            <label for="ProductID">ProductID:</label>
+            <input type="text" id="ProductID" name="ProductID" placeholder="Enter ProductID" />
+            <label for="SupplierID">SupplierID:</label>
+            <input type="text" id="SupplierID" name="SupplierID" placeholder="Enter SupplierID" />
+            <label for="ProductName">ProductName:</label>
+            <input type="text" id="ProductName" name="ProductName" placeholder="Enter ProductName" />
+            <label for="Price">Price:</label>
+            <input type="text" id="Price" name="Price" placeholder="Enter Price" />
+            <button type="submit">Predict Category</button>
+        </form>
+    </div>
+</body>
+</html>
