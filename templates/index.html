@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Customer Segmentation</title>
+    <style>
+        /* Dark theme background and text */
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        /* Container to center the form */
+        .container {
+            background-color: #1e1e1e;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.7);
+            width: 350px;
+            box-sizing: border-box;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            /* pastel light pink and pastel light blue mix */
+            color: #ffb6c1; /* pastel light pink fallback */
+            background: linear-gradient(45deg, #ffb6c1, #add8e6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 10px;
+            margin-bottom: 5px;
+            font-weight: bold;
+            /* pastel light pink and pastel light blue mix */
+            color: #ffb6c1; /* pastel light pink fallback */
+            background: linear-gradient(45deg, #ffb6c1, #add8e6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        input[type="number"], select {
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: #e0e0e0;
+        }
+        input[type="number"]::placeholder {
+            color: #888;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            /* pastel light pink and pastel light blue mix */
+            background: linear-gradient(45deg, #ffb6c1, #add8e6);
+            border: none;
+            border-radius: 5px;
+            color: #121212;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: linear-gradient(45deg, #e6a0b0, #9ac0d9);
+        }
+        #result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.1em;
+            color: #03dac6;
+            min-height: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Customer Segmentation Prediction</h1>
+        <form id="segmentationForm">
+            <label for="Annual_Income">Annual Income:</label>
+            <input type="number" id="Annual_Income" name="Annual_Income" required />
+
+            <label for="Spending_Score__1_100">Spending Score (1-100):</label>
+            <input type="number" id="Spending_Score__1_100" name="Spending_Score__1_100" min="1" max="100" required />
+
+            <label for="Age">Age:</label>
+            <input type="number" id="Age" name="Age" required />
+
+            <label for="Profession">Profession:</label>
+            <select id="Profession" name="Profession" required>
+                <option value="" disabled selected>Select Profession</option>
+                {% for profession in professions %}
+                <option value="{{ profession }}">{{ profession }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="Work_Experience">Work Experience (years):</label>
+            <input type="number" id="Work_Experience" name="Work_Experience" required />
+
+            <label for="Family_Size">Family Size:</label>
+            <input type="number" id="Family_Size" name="Family_Size" required />
+
+            <button type="submit">Predict Segment</button>
+        </form>
+
+        <h2 id="result"></h2>
+    </div>
+
+    <script>
+        document.getElementById('segmentationForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = {};
+            formData.forEach((value, key) => {
+                if (key === 'Profession') {
+                    data[key] = value; // send profession as string
+                } else {
+                    data[key] = Number(value);
+                }
+            });
+            console.log('Form data sent:', data);
+
+            const response = await fetch('/predict', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                document.getElementById('result').textContent = 'Predicted Segment: ' + result.segment;
+            } else {
+                document.getElementById('result').textContent = 'Error: ' + result.error;
+            }
+        });
+    </script>
+</body>
+</html>
