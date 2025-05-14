@@ -1,0 +1,15 @@
+<div class="glass-container">
+  <h2>Cluster Client</h2>
+  <form (ngSubmit)="sendPrediction()" class="predict-form">
+    <input type="number" placeholder="Gender (0=F, 1=M)" [(ngModel)]="input.Gender" name="gender" required>
+    <input type="number" placeholder="Age" [(ngModel)]="input.Age" name="age" required>
+    <input type="number" placeholder="Annual Income" [(ngModel)]="input.Annual_Income" name="income" required>
+    <input type="number" placeholder="Spending Score" [(ngModel)]="input.Spending_Score__1_100" name="score" required>
+    <input type="number" placeholder="Work Experience" [(ngModel)]="input.Work_Experience" name="experience" required>
+    <input type="number" placeholder="Family Size" [(ngModel)]="input.Family_Size" name="family" required>
+
+    <button type="submit">Prédire le Cluster</button>
+  </form>
+
+  <p *ngIf="cluster !== null">Cluster assigné : {{ cluster }}</p>
+</div>
