@@ -1,0 +1,75 @@
+<nav id="sidebar" class="sidebar sidebar-bg" *ngIf="isLoggedIn">
+  <div class="sidebar-content">
+    <div class="sidebar-header">
+      <a href="#">BLINKPAY</a>
+    </div>
+
+    <div class="sidebar-profile">
+      <div class="user-pic">
+<img class="img-responsive img-rounded" src="/assets/img/user.jpg" alt="User picture" />
+
+      </div>
+      <div class="user-info">
+        <span class="user-name">{{ role }} <strong>User</strong></span>
+        <span class="user-role">Connecté</span>
+        <span class="user-status">
+          <i class="fas fa-circle text-success"></i> Online
+        </span>
+      </div>
+    </div>
+
+   <div class="sidebar-search">
+  <div class="input-group search-group">
+    <input
+      type="text"
+      class="form-control search-menu"
+      placeholder="Rechercher..."
+    />
+    <div class="input-group-append">
+      <button class="btn btn-search" type="button">
+        <i class="fa fa-search"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+    <div class="sidebar-menu">
+      <ul>
+        <li *ngIf="role === 'Manager'">
+          <a routerLink="/regression" routerLinkActive="active"><i class="fas fa-chart-line"></i> Prédiction Financière
+</a>
+        </li>
+        
+        <li *ngIf="role === 'CFO'">
+          <a routerLink="/cluster" routerLinkActive="active"><i class="fas fa-users"></i>Cluster Client </a>
+        </li>
+        <li *ngIf="role === 'Manager'">
+          <a routerLink="/timeseries" routerLinkActive="active"><i class="fas fa-clock"></i> Prévision avec Prophet </a>
+        </li>
+        <li *ngIf="role === 'CFO'">
+          <a routerLink="/predict-fournisseur" routerLinkActive="active"><i class="fas fa-shield-alt"></i> Prédiction de Fiabilité Fournisseur
+ </a>
+        </li>
+
+        <li *ngIf="role === 'Manager'">
+          <a routerLink="/dashboard/overview" routerLinkActive="active"><i class="fas fa-chart-pie"></i> Dashboard - Overview</a>
+        </li>
+        <li *ngIf="role === 'CFO'">
+          <a routerLink="/dashboard/analysis" routerLinkActive="active"><i class="fas fa-chart-area"></i> Dashboard - Analyse</a>
+        </li>
+        <li *ngIf="role === 'Manager'">
+          <a routerLink="/dashboard/sales" routerLinkActive="active"><i class="fas fa-chart-bar"></i> Dashboard - Ventes</a>
+        </li>
+        <li *ngIf="role === 'CFO'">
+          <a routerLink="/dashboard/product" routerLinkActive="active"><i class="fab fa-product-hunt"></i> Dashboard - Produits</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sidebar-footer">
+ <button class="btn btn-danger logout-btn" (click)="logout()">      <i class="fas fa-power-off"></i> Déconnexion
+    </button>
+  </div>
+</nav>

@@ -1,0 +1,23 @@
+<div class="glass-container">
+  <h2>Prédiction de Fiabilité Fournisseur</h2>
+
+  <form (ngSubmit)="onSubmit()" #form="ngForm" class="predict-form">
+    <input type="number" placeholder="Nb Commandes" [(ngModel)]="formData.NbCommandes" name="NbCommandes" required />
+    <input type="number" placeholder="Montant Total" [(ngModel)]="formData.MontantTotal" name="MontantTotal" required />
+    <input type="number" placeholder="Délai Paiement" [(ngModel)]="formData.DelaiPaiement" name="DelaiPaiement" required />
+
+    <select [(ngModel)]="formData.TypePaiement" name="TypePaiement" required>
+      <option value="" disabled selected>Type de Paiement</option>
+      <option value="Carte">Carte</option>
+      <option value="Espèces">Espèces</option>
+      <option value="Virement">Virement</option>
+    </select>
+
+    <button type="submit">Prédire</button>
+  </form>
+
+  <div *ngIf="prediction !== null" class="prediction-result">
+    <span *ngIf="prediction === 1" class="good">✅ Fournisseur fiable</span>
+    <span *ngIf="prediction === 0" class="bad">❌ Fournisseur non fiable</span>
+  </div>
+</div>

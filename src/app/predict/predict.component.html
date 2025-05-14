@@ -1,0 +1,12 @@
+<div class="page-container">
+  <div class="glass-panel">
+    <h2>Prédiction Financière</h2>
+    <form (ngSubmit)="sendPrediction()" class="predict-form">
+      <input type="number" placeholder="Amortissement Cumule" [(ngModel)]="input.Amortissement_Cumule" name="amort" required>
+      <input type="number" placeholder="Cout de Maintenance" [(ngModel)]="input.Cout_de_Maintenance" name="cout" required>
+      <input type="number" placeholder="Investissement dans les Actifs" [(ngModel)]="input.Investissement_dans_les_Actifs" name="invest" required>
+      <button type="submit">Prédire</button>
+    </form>
+    <p *ngIf="prediction !== null">Résultat : {{ prediction }}</p>
+  </div>
+</div>
