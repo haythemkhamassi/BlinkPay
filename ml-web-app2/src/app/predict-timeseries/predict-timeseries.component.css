@@ -1,0 +1,91 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  min-height: 100vh;
+  background: radial-gradient(circle, #1e1e1e 40%, #121212 100%);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* === Shared Panel === */
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 40px;
+  width: 90%;
+  max-width: 600px;
+  color: #ffffff;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+}
+
+.glass-panel h2 {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+/* === Form Styling (Prediction) === */
+.predict-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.predict-form input {
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  font-size: 14px;
+  outline: none;
+}
+
+.predict-form input::placeholder {
+  color: #ccc;
+}
+
+button {
+  background-color: #2196f3;
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background-color: #1976d2;
+}
+
+p {
+  text-align: center;
+  margin-top: 16px;
+  font-weight: bold;
+}
+
+/* === Chart Styling (Time Series / Prophet) === */
+canvas {
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+/* === iframe (Power BI) === */
+iframe {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}

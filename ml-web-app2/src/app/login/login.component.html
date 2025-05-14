@@ -1,0 +1,16 @@
+<div class="login-container">
+  <img src="/assets/img/blinkpay-logo.png" alt="Blinkpay Logo" class="logo-img" />
+  <h2>Connexion</h2>
+  <form (ngSubmit)="login()">
+    <div class="input-group">
+      <input [(ngModel)]="email" name="email" placeholder="Email" type="email" required>
+    </div>
+    <div class="input-group">
+      <input [(ngModel)]="password" name="password" placeholder="Mot de passe" type="password" required>
+    </div>
+    <button type="submit">Se connecter</button>
+    <div *ngIf="error" class="error-message">{{ error }}</div>
+  </form>
+<p class="signup-link">
+  Pas de compte ? <a [routerLink]="['/signup']">Créer un compte</a>
+</p></div>
